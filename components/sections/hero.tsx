@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDownIcon } from "lucide-react";
 import RotatingText from "@/components/RotatingText";
-import Lanyard from "@/Lanyard/Lanyard";
 import { cn } from "@/lib/utils";
 
 export function HeroSection() {
@@ -72,15 +71,6 @@ export function HeroSection() {
         />
       </div>
 
-{/*     
-      <div>
-        <Lanyard
-          position={[0, 0, 30]}
-          gravity={[0, -40, 0]}
-          fov={20}
-          transparent={true}
-        />
-      </div> */}
       <div className="container mx-auto px-4 md:px-8" ref={elementsRef}>
         <div className="max-w-4xl">
           {/* Available for freelance work */}
