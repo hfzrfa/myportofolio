@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
+import Swal from "sweetalert2"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
@@ -49,12 +50,36 @@ export function ContactSection() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // This would normally submit to an API
-    console.log(values)
-    alert("Form submitted successfully! (This is a demo)")
-    form.reset()
-  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "34063185-7f2b-4f27-80b8-1bda84e50a75");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json
+    });
+    const result = await response.json();
+    if (result.success) {
+        console.log(result);
+        Swal.fire({
+          title: "Thank you!",
+          text: "Your message has been sent successfully.",
+          icon: "success",
+          
+        });
+        form.reset();
+    }
+}
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -100,14 +125,14 @@ export function ContactSection() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
           <p className="text-muted-foreground">
-            Interested in working together or have a question? Feel free to reach out and I'll get back to you as soon as possible.
+            Interested in working together or have a question? Feel free to reach out and I&apos;ll get back to you as soon as possible.
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <div ref={formRef} className="appear">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <FormField
                   control={form.control}
                   name="name"
