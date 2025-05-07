@@ -7,10 +7,7 @@ import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Portfolio | Creative Developer',
-  description: 'Professional portfolio showcasing creative development work and skills',
-};
+
 
 export default function RootLayout({
   children,
@@ -18,7 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
+    <head>
+        <title>HAFIZ RAFIE ADITYA</title>
+        <link rel="icon" href="/LOGO H.png" type="image/png" />
+    </head>
       <body className={cn(inter.className, "min-h-screen antialiased")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LoadingScreen />

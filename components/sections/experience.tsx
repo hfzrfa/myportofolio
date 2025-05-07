@@ -71,7 +71,7 @@ export function ExperienceSection() {
     <section 
       id="experience" 
       ref={sectionRef}
-      className="py-20 md:py-32 bg-secondary/50"
+      className="py-20 md:py-32 bg-secondary/10"
     >
       <div className="container px-4 mx-auto">
         <div 

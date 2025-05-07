@@ -131,7 +131,7 @@ export function HeroSection() {
                   "IoT Development",
                   "Network Development",
                 ]}
-                mainClassName="px-2 sm:px-2 md:px-3 bg-[#C6F10E] text-black overflow-hidden py-0.5 sm:py-1 justify-center rounded-full text-2xl font-bold inline-flex transition-all duration-500"
+                mainClassName="px-2 sm:px-2 md:px-3 bg-[#C6F10E] text-black overflow-hidden py-0.5 sm:py-1 justify-center rounded-2xl text-2xl font-bold inline-flex transition-all duration-500"
                 staggerFrom="last"
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}

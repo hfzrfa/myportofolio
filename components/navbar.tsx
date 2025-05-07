@@ -28,9 +28,9 @@ const navItems = [
   { href: "#education", label: "Education", icon: <GraduationCap className="h-5 w-5" /> },
   { href: "#experience", label: "Experience", icon: <Briefcase className="h-5 w-5" /> },
   { href: "#organization", label: "Organization", icon: <Users className="h-5 w-5" /> },
-  { href: "#projects", label: "Projects", icon: <Code2 className="h-5 w-5" /> },
+  // { href: "#projects", label: "Projects", icon: <Code2 className="h-5 w-5" /> },
   { href: "#contact", label: "Contact", icon: <Mail className="h-5 w-5" /> },
-  { href: "/blog", label: "Blog", icon: <Book className="h-5 w-5" /> }
+  // { href: "/blog", label: "Blog", icon: <Book className="h-5 w-5" /> }
 ]
 
 const socialLinks = [

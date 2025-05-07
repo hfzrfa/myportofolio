@@ -64,9 +64,9 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 ">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+    <section id="about" ref={sectionRef} className="py-20 md:py-40 bg-secondary/10">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
           <div ref={imageRef} className="appear w-full md:w-5/12 lg:w-1/2">
             <div className="relative w-full h-0 pb-[100%] max-w-md mx-auto rounded-2xl overflow-hidden">
               <Image
