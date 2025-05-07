@@ -51,13 +51,26 @@ export function ContactSection() {
   })
 
 
-  async function handleSubmit(event) {
+  interface FormDataObject {
+    access_key: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+  }
+
+  interface Web3FormsResponse {
+    success: boolean;
+    message: string;
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.target as HTMLFormElement);
 
     formData.append("access_key", "34063185-7f2b-4f27-80b8-1bda84e50a75");
 
-    const object = Object.fromEntries(formData);
+    const object: FormDataObject = Object.fromEntries(formData) as unknown as FormDataObject;
     const json = JSON.stringify(object);
 
     const response = await fetch("https://api.web3forms.com/submit", {
@@ -68,18 +81,17 @@ export function ContactSection() {
         },
         body: json
     });
-    const result = await response.json();
+    const result: Web3FormsResponse = await response.json();
     if (result.success) {
         console.log(result);
         Swal.fire({
           title: "Thank you!",
           text: "Your message has been sent successfully.",
           icon: "success",
-          
         });
         form.reset();
     }
-}
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
