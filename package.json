@@ -1,6 +1,7 @@
 {
   "name": "nextjs",
   "version": "0.1.0",
+  "proxy": "https://api.web3forms.com",
   "private": true,
   "scripts": {
     "dev": "next dev",

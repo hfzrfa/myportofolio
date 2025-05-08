@@ -72,12 +72,6 @@ export function AboutSection() {
               <Image
                 src={PP}
                 alt="Professional portrait"
-                layout="fill"
-                objectFit="cover"
-                sizes="(max-width: 768px) 10vw, 50vw"
-                className="absolute inset-0"
-                priority={false}
-                
               />
             </div>
           </div>
@@ -91,21 +85,21 @@ export function AboutSection() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
             <p className="text-muted-foreground mb-4">
-              Hi there! 🌟 I'm Hafiz Rafie Aditya, a web and IoT developer based
+              Hi there! 🌟 I&apos;m Hafiz Rafie Aditya, a web and IoT developer based
               in Bandung. I love designing websites that are not only beautiful,
-              but also easy for people to use and safe. I'm also into designing
+              but also easy for people to use and safe. I&apos;m also into designing
               cool and useful IoT systems.
             </p>
             <p className="text-muted-foreground mb-4">
-              Right now, I'm studying for a Diploma in Computer Technology at
-              Telkom University, with a focus on web development and IoT. I'm
+              Right now, I&apos;m studying for a Diploma in Computer Technology at
+              Telkom University, with a focus on web development and IoT. I&apos;m
               good at turning designs into easy-to-use interfaces, and I always
               try to make the user experience better with every project.
             </p>
             <p className="text-muted-foreground mb-6">
               I love finding solutions that look great and work well, paying
               close attention to every detail, and following the latest trends
-              in the industry. When I'm not coding, I like exploring technology,
+              in the industry. When I&apos;m not coding, I like exploring technology,
               music, networking, and sports to stay up to date with the digital
               world.
             </p>
