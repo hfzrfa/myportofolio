@@ -4,16 +4,28 @@ import { useEffect, useRef } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, Clock } from "lucide-react"
+import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Button } from "@/components/ui/button"
 
 const blogPosts = [
   {
     title: "Mengembangkan Aplikasi Web Modern",
     date: "2024-03-15",
     readTime: "5 min read",
-    image: "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg",
+    images: [
+      "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg",
+      "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
+      "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    ],
     content: "Pengalaman saya dalam mengembangkan aplikasi web menggunakan teknologi modern seperti React dan Next.js. Pembelajaran dan tantangan yang dihadapi selama proses development.",
     tags: ["Web Development", "React", "Next.js"]
   },
@@ -21,7 +33,11 @@ const blogPosts = [
     title: "Workshop UI/UX Design",
     date: "2024-03-10",
     readTime: "4 min read",
-    image: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
+    images: [
+      "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
+      "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg",
+      "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    ],
     content: "Menghadiri workshop UI/UX design yang membahas tentang prinsip-prinsip desain modern dan praktik terbaik dalam menciptakan pengalaman pengguna yang optimal.",
     tags: ["UI/UX", "Design", "Workshop"]
   },
@@ -29,7 +45,11 @@ const blogPosts = [
     title: "Kolaborasi Project Open Source",
     date: "2024-03-05",
     readTime: "6 min read",
-    image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
+    images: [
+      "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
+      "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg",
+      "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
+    ],
     content: "Pengalaman berpartisipasi dalam project open source, berkontribusi pada komunitas developer, dan pembelajaran berharga dari kolaborasi dengan developer dari berbagai negara.",
     tags: ["Open Source", "Collaboration", "Community"]
   }
@@ -91,13 +111,25 @@ export default function BlogPage() {
               {blogPosts.map((post, index) => (
                 <Card key={index} className="overflow-hidden border-0 shadow-md hover:shadow-lg transition-shadow">
                   <div className="relative h-48 w-full">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                    <Carousel className="w-full" opts={{ loop: true, align: "start" }} autoplay>
+                      <CarouselContent>
+                        {post.images.map((image, i) => (
+                          <CarouselItem key={i}>
+                            <div className="relative h-48 w-full">
+                              <Image
+                                src={image}
+                                alt={`${post.title} - Image ${i + 1}`}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              />
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious className="left-2" />
+                      <CarouselNext className="right-2" />
+                    </Carousel>
                   </div>
                   <CardHeader>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
