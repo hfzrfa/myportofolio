@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./theme-toggle"
 import {
@@ -23,14 +24,13 @@ import {
 import { Button } from "./ui/button"
 
 const navItems = [
-  { href: "#home", label: "Home", icon: <Home className="h-5 w-5" /> },
-  { href: "#about", label: "About", icon: <User className="h-5 w-5" /> },
-  { href: "#education", label: "Education", icon: <GraduationCap className="h-5 w-5" /> },
-  { href: "#experience", label: "Experience", icon: <Briefcase className="h-5 w-5" /> },
-  { href: "#organization", label: "Organization", icon: <Users className="h-5 w-5" /> },
-  // { href: "#projects", label: "Projects", icon: <Code2 className="h-5 w-5" /> },
-  { href: "#contact", label: "Contact", icon: <Mail className="h-5 w-5" /> },
-  // { href: "/blog", label: "Blog", icon: <Book className="h-5 w-5" /> }
+  { href: "/", label: "Home", icon: <Home className="h-5 w-5" /> },
+  { href: "/#about", label: "About", icon: <User className="h-5 w-5" /> },
+  { href: "/#education", label: "Education", icon: <GraduationCap className="h-5 w-5" /> },
+  { href: "/#experience", label: "Experience", icon: <Briefcase className="h-5 w-5" /> },
+  { href: "/#organization", label: "Organization", icon: <Users className="h-5 w-5" /> },
+  { href: "/#contact", label: "Contact", icon: <Mail className="h-5 w-5" /> },
+  { href: "/blog", label: "Blog", icon: <Book className="h-5 w-5" /> }
 ]
 
 const socialLinks = [
@@ -40,14 +40,16 @@ const socialLinks = [
 ]
 
 export function Navbar() {
-  const [activeSection, setActiveSection] = useState("home")
-  const [isHidden, setIsHidden] = useState(true) // Initially hidden
+  const [activeSection, setActiveSection] = useState("")
+  const [isHidden, setIsHidden] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsHidden(false) // Show after 2 seconds
+      setIsHidden(false)
     }, 2000)
 
     return () => clearTimeout(timer)
@@ -62,17 +64,19 @@ export function Navbar() {
       }
       setLastScrollY(window.scrollY)
 
-      const sections = navItems
-        .filter(item => item.href.startsWith('#'))
-        .map(item => item.href.substring(1))
-      
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100) {
-            setActiveSection(section)
-            break
+      if (pathname === "/") {
+        const sections = navItems
+          .filter(item => item.href.startsWith("/#"))
+          .map(item => item.href.substring(2))
+        
+        for (const section of sections.reverse()) {
+          const element = document.getElementById(section)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            if (rect.top <= 100) {
+              setActiveSection(section)
+              break
+            }
           }
         }
       }
@@ -80,17 +84,29 @@ export function Navbar() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [lastScrollY, pathname])
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: "smooth"
-      })
-      setIsMobileMenuOpen(false)
+  const handleNavigation = (href: string) => {
+    if (href.startsWith("/#")) {
+      if (pathname !== "/") {
+        router.push("/")
+        // Wait for navigation to complete before scrolling
+        setTimeout(() => {
+          const element = document.getElementById(href.substring(2))
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" })
+          }
+        }, 100)
+      } else {
+        const element = document.getElementById(href.substring(2))
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+    } else {
+      router.push(href)
     }
+    setIsMobileMenuOpen(false)
   }
 
   return (
@@ -116,23 +132,18 @@ export function Navbar() {
       >
         <nav className="flex flex-col items-center justify-center h-full gap-8">
           {navItems.map(({ href, label, icon }) => (
-            <Link
+            <button
               key={href}
-              href={href}
-              onClick={(e) => {
-                if (href.startsWith('#')) {
-                  e.preventDefault()
-                  scrollToSection(href.substring(1))
-                }
-              }}
+              onClick={() => handleNavigation(href)}
               className={cn(
                 "flex items-center gap-3 text-lg font-medium transition-colors",
-                href.startsWith('#') && activeSection === href.substring(1) && "text-primary"
+                href.startsWith("/#") && activeSection === href.substring(2) && "text-primary",
+                href === pathname && "text-primary"
               )}
             >
               {icon}
               <span>{label}</span>
-            </Link>
+            </button>
           ))}
           
           <div className="flex gap-6 mt-8">
@@ -160,25 +171,20 @@ export function Navbar() {
       >
         <nav className="flex flex-col items-center gap-8 bg-background/80 backdrop-blur-xl p-4 rounded-full shadow-lg">
           {navItems.map(({ href, label, icon }) => (
-            <Link
+            <button
               key={href}
-              href={href}
-              onClick={(e) => {
-                if (href.startsWith('/')) {
-                  e.preventDefault()
-                  scrollToSection(href.substring(1))
-                }
-              }}
+              onClick={() => handleNavigation(href)}
               className={cn(
                 "relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 group",
-                href.startsWith('#') && activeSection === href.substring(1) && "text-primary"
+                href.startsWith("/#") && activeSection === href.substring(2) && "text-primary",
+                href === pathname && "text-primary"
               )}
             >
               {icon}
               <span className="absolute right-full mr-4 px-2 py-1 rounded-md bg-background shadow-md text-sm opacity-0 -translate-x-2 transition-all duration-300 whitespace-nowrap pointer-events-none group-hover:opacity-100 group-hover:translate-x-0">
                 {label}
               </span>
-            </Link>
+            </button>
           ))}
         </nav>
 
