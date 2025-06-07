@@ -7,8 +7,7 @@ import { ArrowDownIcon } from "lucide-react";
 import RotatingText from "@/components/RotatingText";
 import { cn } from "@/lib/utils";
 import AnimationLottie from "@/components/helper/animation-lottie";
-import { BsPersonWorkspace } from "react-icons/bs";
-import experience from "@/app/assets/lottie/code.json";
+import experience from "@/app/assets/lottie/study.json";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -150,12 +149,18 @@ export function HeroSection() {
         </div>
       </div>
       
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl">
-          <AnimationLottie
-            animationPath={experience}
-            width="100%" // Set the width to 100% to make it responsive
-          />
+      <div className="absolute top-0 -right-80 h-full w-full flex items-center justify-center">
+        <div className="hidden sm:block w-full max-w-md sm:max-w md:max-w-2xl lg:max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 3.2 }}
+          >
+            <AnimationLottie
+              animationPath={experience}
+              width="100%" // Set the width to 100% to make it responsive
+            />
+          </motion.div>
         </div>
       </div>
 

@@ -89,7 +89,7 @@ export function ExperienceSection() {
           className="stagger-appear max-w-4xl mx-auto"
         >
           {experienceData.map((experience, index) => (
-            <Card key={index} className="mb-8 border-0 shadow-lg">
+            <Card key={index} className="mb-8 border-0 shadow-lg rounded-xl">
               <CardHeader>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="bg-primary/10 text-primary p-3 rounded-full">

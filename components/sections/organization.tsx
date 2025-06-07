@@ -92,7 +92,7 @@ export function OrganizationSection() {
           className="stagger-appear max-w-4xl mx-auto"
         >
           {organizationData.map((org, index) => (
-            <Card key={index} className="mb-8 border-0 shadow-lg bg-secondary/50">
+            <Card key={index} className="mb-8 border-0 shadow-lg bg-secondary/50 rounded-xl">
               <CardHeader>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="bg-primary/10 text-primary p-3 rounded-full">

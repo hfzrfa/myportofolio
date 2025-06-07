@@ -65,7 +65,7 @@ export function EducationSection() {
     <section 
       id="education" 
       ref={sectionRef}
-      className="py-20 md:py-32"
+      className="py-20 md:py-32 "
     >
       <div className="container px-4 mx-auto">
         <div 
@@ -83,7 +83,7 @@ export function EducationSection() {
           className="stagger-appear max-w-4xl mx-auto"
         >
           {educationData.map((education, index) => (
-            <Card key={index} className="mb-8 border-0 shadow-lg bg-secondary/50">
+            <Card key={index} className="mb-8 border-0 shadow-lg bg-secondary/50 rounded-xl glow-card">
               <CardHeader>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="bg-primary/10 text-primary p-3 rounded-full">
