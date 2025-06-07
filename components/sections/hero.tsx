@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownIcon } from "lucide-react";
 import RotatingText from "@/components/RotatingText";
 import { cn } from "@/lib/utils";
+import AnimationLottie from "@/components/helper/animation-lottie";
+import { BsPersonWorkspace } from "react-icons/bs";
+import experience from "@/app/assets/lottie/code.json";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -73,22 +76,6 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 md:px-8" ref={elementsRef}>
         <div className="max-w-4xl">
-          {/* Available for freelance work */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2.5 }}
-            className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-6"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            Available for freelance work
-          </motion.div> */}
-
-
-
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -112,12 +99,6 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 3.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8"
           >
-            {/* I am a Computer Technology student at Telkom University,
-            specializing in web application development with HTML, CSS,
-            JavaScript, and PHP. I am proficient in React.js for interactive web
-            apps and have a basic understanding of IoT. I focus on building
-            responsive, dynamic web applications and continuously improving my
-            technical skills. */}
             <div className="flex items-center gap-2">
               <h1 className="text-2xl text-white font-bold">
                 I'm Ready For Job
@@ -166,6 +147,15 @@ export function HeroSection() {
               View my work
             </Button>
           </motion.div>
+        </div>
+      </div>
+      
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl">
+          <AnimationLottie
+            animationPath={experience}
+            width="100%" // Set the width to 100% to make it responsive
+          />
         </div>
       </div>
 
